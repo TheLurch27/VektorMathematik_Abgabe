@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace VektorMathematik_Abgabe
 {
@@ -7,7 +8,6 @@ namespace VektorMathematik_Abgabe
         static void Main(string[] args)
         {
             VektorMathematikAusgabe();
-            EingabeVektorWerte();
             ZeigeAuswahlmenü();
         }
 
@@ -21,87 +21,6 @@ namespace VektorMathematik_Abgabe
             Console.ForegroundColor = ConsoleColor.White;
             Console.ReadKey();
             Console.Clear();
-        }
-
-        // Methode zur Eingabe von Werten für Vektoren 1 und 2
-        static void EingabeVektorWerte()
-        {
-            Vektor vektor1 = new Vektor();
-            Vektor vektor2 = new Vektor();
-
-            Console.WriteLine("Bitte geben Sie die Werte für Vektor 1 ein:");
-            Console.WriteLine();
-
-            // Eingabe und Überprüfung für Vektor 1
-            Console.Write("x-Wert: ");
-            vektor1.x = GetValidIntegerInput();
-            Console.WriteLine();
-
-            Console.Write("y-Wert: ");
-            vektor1.y = GetValidIntegerInput();
-            Console.WriteLine();
-
-            Console.Write("z-Wert: ");
-            vektor1.z = GetValidIntegerInput();
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Bitte geben Sie die Werte für Vektor 2 ein:");
-            Console.WriteLine();
-
-            // Eingabe und Überprüfung für Vektor 2
-            Console.Write("x-Wert: ");
-            vektor2.x = GetValidIntegerInput();
-            Console.WriteLine();
-
-            Console.Write("y-Wert: ");
-            vektor2.y = GetValidIntegerInput();
-            Console.WriteLine();
-
-            Console.Write("z-Wert: ");
-            vektor2.z = GetValidIntegerInput();
-            Console.WriteLine();
-            Console.Clear();
-
-            Console.WriteLine("Vielen Dank! Sie haben die Werte für beide Vektoren erfolgreich eingegeben.");
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Press any key to exit the game");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.ReadKey();
-            Console.Clear();
-        }
-
-        // Hilfsmethode zur Eingabe und Überprüfung ganzer Zahlen
-        static int GetValidIntegerInput()
-        {
-            int value = 0; // Initialisierung der Variable
-            while (true)
-            {
-                string input = Console.ReadLine();
-                if (!int.TryParse(input, out value) || value < 0 || value > 100)
-                {
-                    Console.Clear(); // Löschen der Konsole
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Ungültige Eingabe. Bitte gebe nur Positive Ganzzahlen sowie Zahlen im Bereich von 0-100 ein:");
-                    Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Drücken Sie eine beliebige Taste, um fortzufahren.");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.ReadKey();
-                    Console.Clear(); // Löschen der Konsole
-
-                    // Erneute Eingabeaufforderung ohne vorherige Aufforderungen
-                    Console.WriteLine("Bitte geben Sie die Werte erneut ein:");
-                    Console.WriteLine();
-                    Console.Write("x-Wert: ");
-                }
-                else
-                {
-                    break; // Verlassen der Schleife bei gültiger Eingabe
-                }
-            }
-            return value;
         }
 
         // Methode zum Anzeigen des Auswahlmenüs
@@ -159,46 +78,148 @@ namespace VektorMathematik_Abgabe
         // VerarbeiteAuswahl-Methode
         static void VerarbeiteAuswahl(int option)
         {
-            Vektor vektor1 = new Vektor(); // Vektor 1 initialisieren
-            Vektor vektor2 = new Vektor(); // Vektor 2 initialisieren
-
             switch (option)
             {
                 case 1:
-                    // Code für Addition von Vektoren
+                    // Addition von Vektoren
+                    EingabeVektorWerte('+');
+                    break;
+                case 2:
+                    // Subtraktion von Vektoren
+                    EingabeVektorWerte('-');
+                    break;
+                case 3:
+                    // Multiplikation eines Vektors mit einem Skalar
+                    EingabeVektorWerte('*');
+                    break;
+                case 4:
+                    // Berechnung der Distanz zwischen zwei Vektoren
+                    EingabeVektorWerte('d');
+                    break;
+                case 5:
+                    // Berechnung der Länge eines Vektors
+                    EingabeVektorWerte('l');
+                    break;
+                case 6:
+                    // Berechnung der Quadratlänge eines Vektors
+                    EingabeVektorWerte('q');
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // Methode zur Eingabe von Werten für Vektoren
+        static void EingabeVektorWerte(char operation)
+        {
+            Vektor vektor1 = new Vektor();
+            Vektor vektor2 = new Vektor();
+
+            Console.WriteLine("Bitte geben Sie die Werte für Vektor 1 ein:");
+            Console.WriteLine();
+
+            // Eingabe und Überprüfung für Vektor 1
+            Console.Write("x-Wert: ");
+            vektor1.x = GetValidIntegerInput();
+            Console.WriteLine();
+
+            Console.Write("y-Wert: ");
+            vektor1.y = GetValidIntegerInput();
+            Console.WriteLine();
+
+            Console.Write("z-Wert: ");
+            vektor1.z = GetValidIntegerInput();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.WriteLine("Bitte geben Sie die Werte für Vektor 2 ein:");
+            Console.WriteLine();
+
+            // Eingabe und Überprüfung für Vektor 2
+            Console.Write("x-Wert: ");
+            vektor2.x = GetValidIntegerInput();
+            Console.WriteLine();
+
+            Console.Write("y-Wert: ");
+            vektor2.y = GetValidIntegerInput();
+            Console.WriteLine();
+
+            Console.Write("z-Wert: ");
+            vektor2.z = GetValidIntegerInput();
+            Console.WriteLine();
+            Console.Clear();
+
+            // Je nach Auswahl die entsprechende Operation durchführen
+            switch (operation)
+            {
+                case '+':
                     Vektor vektorSumme = vektor1 + vektor2;
                     Console.WriteLine($"Die Summe der Vektoren ist: ({vektorSumme.x}, {vektorSumme.y}, {vektorSumme.z})");
                     break;
-                case 2:
-                    // Code für Subtraktion von Vektoren
+                case '-':
                     Vektor vektorDifferenz = vektor1 - vektor2;
                     Console.WriteLine($"Die Differenz der Vektoren ist: ({vektorDifferenz.x}, {vektorDifferenz.y}, {vektorDifferenz.z})");
                     break;
-                case 3:
-                    // Code für Multiplikation eines Vektors mit einem Skalar
+                case '*':
                     Console.WriteLine("Bitte geben Sie einen Skalarwert ein:");
                     int skalar = GetValidIntegerInput();
                     Vektor vektorProdukt = vektor1 * skalar;
                     Console.WriteLine($"Das Produkt des Vektors mit dem Skalar ist: ({vektorProdukt.x}, {vektorProdukt.y}, {vektorProdukt.z})");
                     break;
-                case 4:
-                    // Code für Berechnung der Distanz zwischen zwei Vektoren
+                case 'd':
                     float distanz = Vektor.Distance(vektor1, vektor2);
                     Console.WriteLine($"Die Distanz zwischen den Vektoren beträgt: {distanz}");
                     break;
-                case 5:
-                    // Code für Berechnung der Länge eines Vektors
+                case 'l':
                     float laenge = vektor1.Length();
                     Console.WriteLine($"Die Länge des Vektors beträgt: {laenge}");
                     break;
-                case 6:
-                    // Code für Berechnung der Quadratlänge eines Vektors
+                case 'q':
                     float quadratLaenge = vektor1.SquareLength();
                     Console.WriteLine($"Die Quadratlänge des Vektors beträgt: {quadratLaenge}");
                     break;
                 default:
                     break;
             }
+
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Press any key to exit the game");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+        // Hilfsmethode zur Eingabe und Überprüfung ganzer Zahlen
+        static int GetValidIntegerInput()
+        {
+            int value = 0; // Initialisierung der Variable
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (!int.TryParse(input, out value) || value < 0 || value > 100)
+                {
+                    Console.Clear(); // Löschen der Konsole
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ungültige Eingabe. Bitte geben Sie eine positive Ganzzahl im Bereich von 0-100 ein:");
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Drücken Sie eine beliebige Taste, um fortzufahren.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ReadKey();
+                    Console.Clear(); // Löschen der Konsole
+
+                    // Erneute Eingabeaufforderung ohne vorherige Aufforderungen
+                    Console.WriteLine("Bitte geben Sie den Wert erneut ein:");
+                    Console.WriteLine();
+                    Console.Write("Wert: ");
+                }
+                else
+                {
+                    break; // Verlassen der Schleife bei gültiger Eingabe
+                }
+            }
+            return value;
         }
     }
 }
