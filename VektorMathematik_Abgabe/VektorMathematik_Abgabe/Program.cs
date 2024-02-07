@@ -7,12 +7,15 @@ namespace VektorMathematik_Abgabe
     {
         static void Main(string[] args)
         {
-            VektorMathematikAusgabe();
-            ZeigeAuswahlmenü();
+            StartScreen();
+            ShowSelectionMenu();
         }
 
-        // Methode zur Ausgabe des Namens "Vektor Mathematik"
-        static void VektorMathematikAusgabe()
+        /// <summary>
+        /// Methode zur Ausgabe des Namens "Vektor Mathematik"
+        /// </summary>
+        #region StartScreen
+        static void StartScreen()
         {
             Console.WriteLine("Vektor Mathematik");
             Console.WriteLine();
@@ -22,19 +25,23 @@ namespace VektorMathematik_Abgabe
             Console.ReadKey();
             Console.Clear();
         }
+        #endregion
 
-        // Methode zum Anzeigen des Auswahlmenüs
-        static void ZeigeAuswahlmenü()
+        /// <summary>
+        /// Methode zum Anzeigen des Auswahlmenüs und Verarbeiten der auswahl
+        /// </summary>
+        #region ShowSelectionMenu 
+        static void ShowSelectionMenu()
         {
             List<string> options = new List<string>
             {
-                "1. Addition von Vektoren",
-                "2. Subtraktion von Vektoren",
-                "3. Multiplikation eines Vektors mit einem Skalar",
-                "4. Berechnung der Distanz zwischen zwei Vektoren",
-                "5. Berechnung der Länge eines Vektors",
-                "6. Berechnung der Quadratlänge eines Vektors",
-                "7. Exit"
+                "1. addition of vectors",
+                "2. subtraction of vectors",
+                "3. multiplication of a vector by a scalar",
+                "4. calculating the distance between two vectors",
+                "5. calculating the length of a vector",
+                "6. calculating the square length of a vector",
+                "7. exit"
             };
 
             int selectedIndex = 0;
@@ -64,92 +71,101 @@ namespace VektorMathematik_Abgabe
                 {
                     if (selectedIndex == options.Count - 1)
                     {
-                        break; // Exit aus dem Menü
+                        break;
                     }
                     else
                     {
-                        // Hier wird die ausgewählte Option verarbeitet
-                        VerarbeiteAuswahl(selectedIndex + 1);
+                        ProcessSelect(selectedIndex + 1);
                     }
                 }
             }
         }
+        #endregion
 
-        // VerarbeiteAuswahl-Methode
-        static void VerarbeiteAuswahl(int option)
+        /// <summary>
+        /// Methode zur Verarbeitung der vom Benutzer ausgewählten Option.
+        /// </summary>
+        /// <param name="option">Die ausgewählte Option.</param>
+        #region ProcessSelect
+        static void ProcessSelect(int option)
         {
             switch (option)
             {
                 case 1:
                     // Addition von Vektoren
-                    EingabeVektorWerte('+');
+                    InputVectorValues('+');
                     break;
                 case 2:
                     // Subtraktion von Vektoren
-                    EingabeVektorWerte('-');
+                    InputVectorValues('-');
                     break;
                 case 3:
                     // Multiplikation eines Vektors mit einem Skalar
-                    EingabeVektorWerte('*');
+                    InputVectorValues('*');
                     break;
                 case 4:
                     // Berechnung der Distanz zwischen zwei Vektoren
-                    EingabeVektorWerte('d');
+                    InputVectorValues('d');
                     break;
                 case 5:
                     // Berechnung der Länge eines Vektors
-                    EingabeVektorWerte('l');
+                    InputVectorValues('l');
                     break;
                 case 6:
                     // Berechnung der Quadratlänge eines Vektors
-                    EingabeVektorWerte('q');
+                    InputVectorValues('q');
                     break;
                 default:
                     break;
             }
         }
+        #endregion
 
-        // Methode zur Eingabe von Werten für Vektoren
-        static void EingabeVektorWerte(char operation)
+        /// <summary>
+        /// Methode zur Eingabe von Werten für Vektoren und Durchführung der entsprechenden Operation.
+        /// </summary>
+        /// <param name="operation">Die ausgewählte Operation (+, -, *, d, l, q).</param>
+        #region InputVectorValues
+        static void InputVectorValues(char operation)
         {
             Vektor vektor1 = new Vektor();
             Vektor vektor2 = new Vektor();
 
-            Console.WriteLine("Bitte geben Sie die Werte für Vektor 1 ein:");
+            Console.WriteLine("Please enter the values for vector 1:");
             Console.WriteLine();
 
-            // Eingabe und Überprüfung für Vektor 1
-            Console.Write("x-Wert: ");
+            // Hier wird die Eingabe von Vektor 1 gemacht und Überprüft
+            Console.Write("x-Value: ");
             vektor1.x = GetValidIntegerInput();
             Console.WriteLine();
 
-            Console.Write("y-Wert: ");
+            Console.Write("y-Value: ");
             vektor1.y = GetValidIntegerInput();
             Console.WriteLine();
 
-            Console.Write("z-Wert: ");
+            Console.Write("z-Value: ");
             vektor1.z = GetValidIntegerInput();
             Console.WriteLine();
             Console.WriteLine();
 
-            Console.WriteLine("Bitte geben Sie die Werte für Vektor 2 ein:");
+            Console.WriteLine("Please enter the values for vector 2:");
             Console.WriteLine();
 
-            // Eingabe und Überprüfung für Vektor 2
-            Console.Write("x-Wert: ");
+            // Hier wird die Eingabe von Vektor 2 gemacht und Überprüft
+            Console.Write("x-Value: ");
             vektor2.x = GetValidIntegerInput();
             Console.WriteLine();
 
-            Console.Write("y-Wert: ");
+            Console.Write("y-Value: ");
             vektor2.y = GetValidIntegerInput();
             Console.WriteLine();
 
-            Console.Write("z-Wert: ");
+            Console.Write("z-Value: ");
             vektor2.z = GetValidIntegerInput();
             Console.WriteLine();
             Console.Clear();
 
-            // Je nach Auswahl die entsprechende Operation durchführen
+            // Hier wird je nach Auswahl die entsprechende Operation durchgeführt
             switch (operation)
             {
                 case '+':
@@ -189,8 +205,13 @@ namespace VektorMathematik_Abgabe
             Console.ReadKey();
             Console.Clear();
         }
+        #endregion
 
-        // Hilfsmethode zur Eingabe und Überprüfung ganzer Zahlen
+        /// <summary>
+        /// Das ist eine Hilfsmethode zur Eingabe und Überprüfung ganzer Zahlen im Bereich von 0 bis 100.
+        /// </summary>
+        /// <returns>Die gültige eingegebene Ganzzahl.</returns>
+        #region GetValidIntegerInput
         static int GetValidIntegerInput()
         {
             int value = 0; // Initialisierung der Variable
@@ -221,5 +242,6 @@ namespace VektorMathematik_Abgabe
             }
             return value;
         }
+        #endregion
     }
 }

@@ -4,6 +4,7 @@ namespace VektorMathematik_Abgabe
 {
     class Vektor
     {
+        #region Parameter constructor and coordinator
         // Felder für die Koordinaten
         public float x;
         public float y;
@@ -24,7 +25,9 @@ namespace VektorMathematik_Abgabe
             this.y = y;
             this.z = z;
         }
+        #endregion
 
+        #region Operator and length/square length
         // Operatorüberladung für die Addition von zwei Vektoren
         public static Vektor operator +(Vektor v1, Vektor v2)
         {
@@ -63,11 +66,14 @@ namespace VektorMathematik_Abgabe
         {
             return x * x + y * y + z * z;
         }
+        #endregion
 
+        #region ToString-Methode
         // Überschreiben der ToString-Methode für eine benutzerfreundliche Ausgabe
         public override string ToString()
         {
             return "(" + x + ", " + y + ", " + z + ")";
         }
+        #endregion
     }
 }
